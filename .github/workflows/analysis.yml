@@ -1,26 +1,30 @@
-name: Go
+name: Go Application CI/CD
 on: [push, pull_request]
+
 jobs:
   build:
-    name: Build
+    name: Build and Test
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code into the Go module directory
+      - name: Checkout Code
         uses: actions/checkout@v4
-      - name: Get the system requirements.
-        run: sudo apt-get install coreutils -y
-      - name: Get the current version of Go from project.
+
+      - name: Setup Go Environment
         uses: actions/setup-go@v5
         with:
           go-version-file: "go.mod"
           cache: true
           check-latest: true
         id: go
-      - name: Get dependencies
-        run: go get .
-      - name: Run Test
+
+      - name: Download Dependencies
+        run: go mod download
+
+      - name: Run Application
         run: go run main.go First_Project
-      - name: Build Test
+
+      - name: Build Application
         run: go build .
-      - name: Run the build
+
+      - name: Execute Build
         run: ./gocreate Second_Project
