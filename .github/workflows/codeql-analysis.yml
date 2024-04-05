@@ -1,17 +1,22 @@
-name: "CodeQL"
+name: "CodeQL Analysis"
 on: [push, pull_request]
+
 jobs:
-  analyse:
-    name: Analyse
+  analyze:
+    name: Analyze Code
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout repository
+    - name: Checkout Repository
       uses: actions/checkout@v4
+
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v3
       with:
         languages: go
-    - name: Autobuild
+
+    - name: Build with Autobuild
       uses: github/codeql-action/autobuild@v3
+
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v3
