@@ -66,7 +66,7 @@ func main() {
 	// Let's make a go.mod file and name it after the project.
 	gomod := `module [Project_Name]
 
-go 1.17`
+go 1.22`
 	newContents := strings.Replace(gomod, ("[Project_Name]"), (projectName), -1)
 	writeToFile(projectName+"/go.mod", newContents)
 	// Create the go.sum file, but keep it blank because we don't have any dependencies.
